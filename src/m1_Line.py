@@ -4,7 +4,7 @@ NOTE: This is NOT rosegraphics -- it is your OWN Line class.
 
 Authors: David Mutchler, Vibha Alangar, Dave Fisher, Amanda Stouder,
          their colleagues and Elijah Williams.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import math
 import m1t_test_Line as m1t
@@ -227,6 +227,10 @@ class Line(object):
         # --------------------------------------------------------------
         self.start = start.clone()
         self.end = end.clone()
+        self.endy = self.end.y
+        self.endx = self.end.x
+        self.startx = self.start.x
+        self.starty = self.start.y
     def __repr__(self):
         """
         What comes in:
@@ -368,7 +372,9 @@ class Line(object):
         #        The tests are already written (below).
         #        They include the Example in the above doc-string.
         # --------------------------------------------------------------
-
+        temp = self.start
+        self.start = self.end
+        self.end = temp
     def slope(self):
         """
         What comes in:
@@ -404,7 +410,12 @@ class Line(object):
         #        The tests are already written (below).
         #        They include the Example in the above doc-string.
         # --------------------------------------------------------------
-
+        slopey = self.endy - self.starty
+        slopex = self.endx - self.startx
+        if slopex is 0:
+            return math.inf
+        else:
+            return slopey / slopex
     def length(self):
         """
         What comes in:
