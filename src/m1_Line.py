@@ -232,8 +232,8 @@ class Line(object):
         self.startx = self.start.x
         self.starty = self.start.y
         self.clones = 0
-        self.instart = start
-        self.inend = end
+        self.instart = self.start
+        self.inend = self.end
     def __repr__(self):
         """
         What comes in:
@@ -415,8 +415,8 @@ class Line(object):
         #        The tests are already written (below).
         #        They include the Example in the above doc-string.
         # --------------------------------------------------------------
-        slopey = self.endy - self.starty
-        slopex = self.endx - self.startx
+        slopey = self.end.y - self.start.y
+        slopex = self.end.x - self.start.x
         if slopex is 0:
             return math.inf
         else:
@@ -593,7 +593,7 @@ class Line(object):
           :rtype: Point
         """
         # --------------------------------------------------------------
-        # TODO: 11.
+        # DONE: 11.
         #   a. READ the above specification, including the Example.
         #        ** ASK QUESTIONS AS NEEDED. **
         #        ** Be sure you understand it, ESPECIALLY the Example.
@@ -601,8 +601,8 @@ class Line(object):
         #        The tests are already written (below).
         #        They include the Example in the above doc-string.
         # --------------------------------------------------------------
-        p1 = (self.startx + self.endx)/2
-        p2 = (self.starty + self.endy)/2
+        p1 = (self.start.x + self.end.x)/2
+        p2 = (self.start.y + self.end.y)/2
         return Point(p1, p2)
     def is_parallel(self, line2):
         """
@@ -631,7 +631,7 @@ class Line(object):
           :rtype: bool
         """
         # --------------------------------------------------------------
-        # TODO: 12.
+        # DONE: 12.
         #   a. READ the above specification, including the Example.
         #        ** ASK QUESTIONS AS NEEDED. **
         #        ** Be sure you understand it, ESPECIALLY the Example.
@@ -665,7 +665,7 @@ class Line(object):
         # and (usually) adequate to distinguish numbers that really
         # are different from each other.
         ################################################################
-        if round(self.slope, 12) == round(line2.slope, 12):
+        if round(line2.slope(), 12) == round(self.slope(), 12):
             return True
         else:
             return False
@@ -707,7 +707,9 @@ class Line(object):
         #        The tests are already written (below).
         #        They include the Example in the above doc-string.
         # --------------------------------------------------------------
-        return Line(self.instart, self.inend)
+        temp = self.instart
+        self.end = self.inend
+        
 
 ########################################################################
 # The TEST functions for the  Line  class begin here.
