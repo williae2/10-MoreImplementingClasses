@@ -709,7 +709,7 @@ class Line(object):
         # --------------------------------------------------------------
         temp = self.instart
         self.end = self.inend
-        
+
 
 ########################################################################
 # The TEST functions for the  Line  class begin here.
